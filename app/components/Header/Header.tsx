@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import Link from 'next/link';
@@ -13,10 +13,10 @@ const Header = () => {
                 <Link href="/" className="font-black text-tertiary-dark">MyAssociation</Link>
                 <ul className="flex items-center ml-5">
                     <li className="flex items-center"> 
-                        <Link href="/auth"><FaUserCircle className="cursor-pointer"/></Link>
+                        <Link href="/Auth"><FaUserCircle className="cursor-pointer"/></Link>
                     </li>
                     <li className="ml-2">
-                        {darkTheme ? <MdOutlineLightMode className="cursor-pointer" onClick={() => {setDarkTheme(false); localStorage.removeItem("hotel-theme")}}/> : <MdDarkMode className="cursor-pointer" onClick={() => {setDarkTheme(true); localStorage.setItem("hotel-theme", "true")}}/>}
+                        {darkTheme ? <MdOutlineLightMode className="cursor-pointer" onClick={() => {setDarkTheme(false); localStorage.removeItem("hotel-theme");}}/> : <MdDarkMode className="cursor-pointer" onClick={() => {setDarkTheme(true); localStorage.setItem("hotel-theme", "true");}}/>}
                     </li>
                 </ul>
             </div>
@@ -25,7 +25,6 @@ const Header = () => {
                 <li className="hover:-translate-y-2 duration-500 transition-all"> <Link href="/">Home</Link> </li>
                 <li className="hover:-translate-y-2 duration-500 transition-all"> <Link href="/rooms">Rooms</Link> </li>
                 <li className="hover:-translate-y-2 duration-500 transition-all"> <Link href="/">Contact</Link> </li>
-               
             </ul>
         </header>
         );
