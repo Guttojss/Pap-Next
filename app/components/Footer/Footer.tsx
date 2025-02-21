@@ -9,13 +9,13 @@ const Footer = () => {
         <div className="container mx-auto px-4">
             <Link href="/" className="font-black text-tertiary-dark">MyAssociation</Link>
 
-            <h4 className="font-semibold text-[40px] py-6">Contact</h4>
+            <h4 className="font-semibold text-[40px] py-6">Contactos</h4>
             <div className="flex flex-warp gap-16 items-center justify-betwwen">
                 <div className="flex-1">
-                    <p>123 road</p>
+                    <p>Escola Profissional do Fundão</p>
                     <div className="flex items-center py4">
                         <BsFillSendFill/>
-                        <p className="ml-2">codewithlari</p>
+                        <p className="ml-2">GuttojssTFG</p>
                     </div>
                     <div className="flex items-center py4">
                         <BsTelephoneOutbound/>
@@ -23,12 +23,12 @@ const Footer = () => {
                     </div>
                     <div className="flex items-center pt-4">
                         <BiMessageDetail/>
-                        <p className="ml-2">codewithlari</p>
+                        <p className="ml-2">GuttojssTFG</p>
                     </div>
                 </div>
                 <div className="flex-1 md:text-right">
                     <p className="pb-4">Our Story</p>
-                    <p className="pb-4">Get in touch</p>
+                    <p className="pb-4">Get in touch</p>    
                     <p className="pb-4">Our Privacy Commitment</p>
                     <p className="pb-4">Terms of service</p>
                     <p>Customer Assistance</p>
