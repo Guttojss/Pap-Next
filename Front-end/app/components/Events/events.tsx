@@ -23,5 +23,6 @@ const Events = () => {
                 </form>
             </div>
         </section>
-    );};
+    )
+}
 export default Events;
