@@ -37,7 +37,7 @@ const Footer = () => {
                 <p className="pb-4">Festas</p>
                 <p className="pb-4">Espaços</p>
                 <p className="pb-4">Treinos</p>
-                <p>Events</p>
+                <p>Outros Eventos</p>
 
                 </div>
             </div>
