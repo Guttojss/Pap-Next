@@ -1,39 +1,49 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
+import Image from 'next/image';
+
+import { Room } from '../models/room';
+import Link from 'next/link';
 
 type Props = {
-  endValue: number;
-  duration: number;
+  room: Room;
 };
 
-const CountUpNumber: FC<Props> = ({ endValue, duration }) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let startTime: number;
-    let animationFrameId: number;
-
-    const updateCount = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-
-      if (progress < duration) {
-        setCount(Math.min(endValue, (progress / duration) * endValue));
-        animationFrameId = requestAnimationFrame(updateCount);
-      } else {
-        setCount(endValue);
-      }
-    };
-
-    animationFrameId = requestAnimationFrame(updateCount);
-
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [endValue, duration]);
+const RoomCard: FC<Props> = props => {
+  const {
+    room: { coverImage, name, price, type, description, slug, isBooked },
+  } = props;
 
   return (
-    <p className='md:font-bold font-medium text-lg xl:text-5xl'>
-      {Math.round(count)}
-    </p>
+    <div className='rounded-xl w-72 mb-10 mx-auto md:mx-0 overflow-hidden text-black'>
+      <div className='h-60 overflow-hidden'>
+        <Image
+          src={coverImage.url}
+          alt={name}
+          width={250}
+          height={250}
+          className='img scale-animation'
+        />
+      </div>
+
+      <div className='p-4 bg-white'>
+        <div className='flex justify-between text-xl font-semibold'>
+          <p>{name}</p>
+          <p>$ {price}</p>
+        </div>
+
+        <p className='pt-2 text-xs'>{type} Room</p>
+
+        <p className='pt-3 pb-6'>{description.slice(1, 100)}...</p>
+
+        <Link
+          href={`/rooms/${slug.current}`}
+          className='bg-primary inline-block text-center w-full py-4 rounded-xl text-white text-xl font-bold hover:-translate-y-2 hover:shadow-lg transition-all duration-500'
+        >
+          {isBooked ? 'BOOKED' : 'BOOK NOW'}
+        </Link>
+      </div>
+    </div>
   );
 };
 
-export default CountUpNumber;
+export default RoomCard;
