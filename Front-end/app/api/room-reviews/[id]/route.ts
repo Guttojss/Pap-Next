@@ -1,19 +1,11 @@
-// @ts-nocheck
-
 import { getRoomReviews } from '../../../components/libs/apis'
 import { NextResponse, type NextRequest } from 'next/server'
 
-type Params = {
-  params: {
-    id: string
-  }
-}
-
 export async function GET(
   req: NextRequest,
-  { params }: Params
+  context: { params: { id: string } }
 ) {
-  const roomId = params.id
+  const roomId = context.params.id
 
   try {
     const roomReviews = await getRoomReviews(roomId)
