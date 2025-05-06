@@ -36,7 +36,7 @@ const RatingModal: FC<Props> = props => {
     >
       <div className='bg-white w-96 p-4 rounded-lg shadow-lg'>
         <h2 className='text-xl dark:text-gray-800 font-semibold mb-2'>
-          Rate Your Experience
+          Divulga a tua expiriencia
         </h2>
         <div className='mb-4'>
           <label className='block text-sm font-medium text-gray-700'>

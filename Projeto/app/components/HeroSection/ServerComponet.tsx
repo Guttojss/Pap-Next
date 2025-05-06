@@ -2,11 +2,12 @@ import Image from 'next/image';
 
 export const heading1 = (
   <>
-    <h1 className='font-heading mb-6'>Explora o nosso Café</h1>
+    <h1 className='font-heading mb-6'>Divulga a tua Associação</h1>
     <p className='text-[#4a4a4a] dark:text-[#ffffffea] mb-12 max-w-lg'>
-      Um café divertido com musica ambiente e muitos eventos á tua espera!
+      Podes incluir toda a informação necessária para atraires clientes!
+      Desde eventos,espaços,newsletters tudo!
     </p>
-    <button className='btn-primary'>Conhece-nos</button>
+    <button className='btn-primary'>Saiba mais</button>
   </>
 );
 

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { FC } from 'react';
 import useSWR from 'swr';
-
 import { Review } from '../models/review';
 import Rating from '../Rating/Rating';
 

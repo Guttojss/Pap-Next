@@ -10,7 +10,7 @@ const Header = () => {
 
     return( <header className="py-10 px-4 container mx-auto text-lv flex flex-warp md:flex-nowrap items-center justify-between">
             <div className="flex items-center w-full md:2/3">
-                <Link href="/" className="font-black text-tertiary-dark">Nossa Tasca</Link>
+                <Link href="/" className="font-black text-tertiary-dark">MyAssociation</Link>
                 <ul className="flex items-center ml-5">
                     <li className="flex items-center"> 
                         <Link href="/Auth"><FaUserCircle className="cursor-pointer"/></Link>
@@ -23,7 +23,7 @@ const Header = () => {
             
             <ul className="flex items-center justify-between w-full md:w-1/3 mt-4">
                 <li className="hover:-translate-y-2 duration-500 transition-all"> <Link href="/">Inicio</Link> </li>
-                <li className="hover:-translate-y-2 duration-500 transition-all"> <Link href="/events">Eventos</Link> </li>
+                <li className="hover:-translate-y-2 duration-500 transition-all"> <Link href="/events">Associações</Link> </li>
                 <li className="hover:-translate-y-2 duration-500 transition-all"> <Link href="/">Contactos</Link> </li>
             </ul>
         </header>

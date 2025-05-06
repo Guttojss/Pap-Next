@@ -16,8 +16,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Nossa Tasca',
-  description: 'Petiscos e Convivio',
+  title: 'MyAssociation',
+  description: 'solução de software para gestão de associativismo',
 };
 
 export default function RootLayout({

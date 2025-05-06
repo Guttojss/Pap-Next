@@ -7,15 +7,15 @@ import { BiMessageDetail } from "react-icons/bi";
 const Footer = () => {
     return(<footer className="mt-16">
         <div className="container mx-auto px-4">
-            <Link href="/" className="font-black text-tertiary-dark">Nossa Tasca</Link>
+            <Link href="/" className="font-black text-tertiary-dark">MyAssociation</Link>
 
             <h4 className="font-semibold text-[40px] py-6">Contactos</h4>
             <div className="flex flex-warp gap-16 items-center justify-betwwen">
                 <div className="flex-1">
-                    <p>Largo Santo Antonio</p>
+                    <p>EPF</p>
                     <div className="flex items-center py4">
                         <BsFillSendFill/>
-                        <p className="ml-2">Nossa Tasca</p>
+                        <p className="ml-2">MyAssociation</p>
                     </div>
                     <div className="flex items-center py4">
                         <BsTelephoneOutbound/>
@@ -23,22 +23,15 @@ const Footer = () => {
                     </div>
                     <div className="flex items-center pt-4">
                         <BiMessageDetail/>
-                        <p className="ml-2">Nossa Tasca</p>
+                        <p className="ml-2">MyAssociation</p>
                     </div>
                 </div>
+                
                 <div className="flex-1 md:text-right">
                     <p className="pb-4">Nossa historia</p>
                     <p className="pb-4">Entra em contacto</p>    
                     <p className="pb-4">termos de serviço</p>
                     <p>Apoio ao cliente</p>
-                </div>
-                <div className="flex-1 md:text-right">
-                <p className="pb-4">Jantares</p>
-                <p className="pb-4">Festas</p>
-                <p className="pb-4">Espaços</p>
-                <p className="pb-4">Treinos</p>
-                <p>Outros Eventos</p>
-
                 </div>
             </div>
             <p>Feito por : @Guttojss</p>

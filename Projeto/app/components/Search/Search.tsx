@@ -35,7 +35,7 @@ const Search: FC<Props> = ({
       <div className='container mx-auto flex gap-4 flex-wrap justify-between items-center'>
         <div className='w-full md:1/3 lg:w-auto mb-4 md:mb-0'>
           <label className='block text-sm font-medium mb-2 text-black'>
-            Tipo de evento
+            Tipo de associação
           </label>
           <div className='relative'>
             <select
@@ -43,10 +43,10 @@ const Search: FC<Props> = ({
               onChange={handleRoomTypeChange}
               className='w-full px-4 py-2 capitalize rounded leading-tight dark:bg-black focus:outline-none'
             >
-              <option value='All'>Todos</option>
-              <option value='Basic'>Bailes Dançantes</option>
-              <option value='Luxury'>Karaokes</option>
-              <option value='Suite'>Outros Evetos</option>
+              <option value='All'>Todas</option>
+              <option value='Basic'>Culturais</option>
+              <option value='Luxury'>Desportivos</option>
+              <option value='Suite'>Outros</option>
             </select>
           </div>
         </div>
