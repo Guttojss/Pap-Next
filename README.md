@@ -18,7 +18,7 @@ Logo, este Projeto é uma aplicação para a divulgação de Associações, com 
 
 **Front-end:** React.js <br/>
 **Back-end:** Next.js   <br/>
-**Api's:** Stripe,Sanity <br/>
+**Libs:** Stripe,Sanity <br/>
 
 
 
