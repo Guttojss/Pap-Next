@@ -20,6 +20,9 @@ Logo, este Projeto é uma aplicação para a divulgação de Associações, com 
 **Back-end:** Next.js   <br/>
 **Api's:** Stripe,Sanity <br/>
 
+
+**Inspiração / Template** [text](https://github.com/laribright/hotel-management)
+
 ## Autores
 
 - [@Guttojss](https://www.github.com/Guttojss)
