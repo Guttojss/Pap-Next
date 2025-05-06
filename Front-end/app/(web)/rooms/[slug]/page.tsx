@@ -1,5 +1,6 @@
 'use client';
 
+import { useParams } from 'next/navigation'; // <-- Importa o `params` no client-side
 import useSWR from 'swr';
 import { MdOutlineCleaningServices } from 'react-icons/md';
 import { LiaFireExtinguisherSolid } from 'react-icons/lia';
@@ -7,7 +8,6 @@ import { AiOutlineMedicineBox } from 'react-icons/ai';
 import { GiSmokeBomb } from 'react-icons/gi';
 import { useState } from 'react';
 import axios from 'axios';
-
 import { getRoom } from '../../../components/libs/apis';
 import LoadingSpinner from '../../loading';
 import HotelPhotoGallery from '../../../components/HotelPhotoGallery/HotelPhotoGallery';
@@ -16,25 +16,20 @@ import toast from 'react-hot-toast';
 import { getStripe } from '../../../components/libs/stripe';
 import RoomReview from '../../../components/RoomReview/RoomReview';
 
-const RoomDetails = (props: { params: { slug: string } }) => {
-  const {
-    params: { slug },
-  } = props;
+const RoomDetails = () => {
+  const { slug } = useParams(); // <- Aqui é como pegamos o `slug` no client
 
   const [checkinDate, setCheckinDate] = useState<Date | null>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
   const [adults, setAdults] = useState(1);
   const [noOfChildren, setNoOfChildren] = useState(0);
 
-  const fetchRoom = async () => getRoom(slug);
+  const fetchRoom = async () => getRoom(slug as string);
 
   const { data: room, error, isLoading } = useSWR('/api/room', fetchRoom);
 
-  if (error) throw new Error('Cannot fetch data');
-  if (typeof room === 'undefined' && !isLoading)
-    throw new Error('Cannot fetch data');
-
-  if (!room) return <LoadingSpinner />;
+  if (error) return <div>Erro ao carregar o quarto.</div>;
+  if (isLoading || !room) return <LoadingSpinner />;
 
   const calcMinCheckoutDate = () => {
     if (checkinDate) {
@@ -53,9 +48,7 @@ const RoomDetails = (props: { params: { slug: string } }) => {
       return toast.error('Please choose a valid checkin period');
 
     const numberOfDays = calcNumDays();
-
     const hotelRoomSlug = room.slug.current;
-
     const stripe = await getStripe();
 
     try {
@@ -78,16 +71,14 @@ const RoomDetails = (props: { params: { slug: string } }) => {
         }
       }
     } catch (error) {
-      console.log('Error: ', error);
-      toast.error('An error occured');
+      toast.error('An error occurred');
     }
   };
 
   const calcNumDays = () => {
     if (!checkinDate || !checkoutDate) return;
     const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
-    const noOfDays = Math.ceil(timeDiff / (24 * 60 * 60 * 1000));
-    return noOfDays;
+    return Math.ceil(timeDiff / (24 * 60 * 60 * 1000));
   };
 
   return (

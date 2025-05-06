@@ -3,7 +3,6 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
-
 import { getRooms } from '../../components/libs/apis';
 import { Room } from '../../components/models/room';
 import Search from '../../components/Search/Search';
