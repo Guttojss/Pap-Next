@@ -1,14 +1,14 @@
 import { defineField } from 'sanity';
 
-const roomTypes = [
-  { title: 'Basic', value: 'basic' },
-  { title: 'Luxury', value: 'luxury' },
-  { title: 'Suite', value: 'suite' },
+const tiposAssociacao = [
+  { title: 'Culturais', value: 'Culturais' },
+  { title: 'Desportivas', value: 'Desportivas' },
+  { title: 'Outras', value: 'Outras' },
 ];
 
-const hotelRoom = {
-  name: 'hotelRoom',
-  title: 'Hotel Room',
+const associacao = {
+  name: 'associacao',
+  title: 'Associação',
   type: 'document',
   fields: [
     defineField({
@@ -16,7 +16,7 @@ const hotelRoom = {
       title: 'Name',
       type: 'string',
       validation: Rule =>
-        Rule.required().max(50).error('Maximum 50 Characters'),
+        Rule.required().max(50).error('Máximo de 50 caracteres'),
     }),
     defineField({
       name: 'slug',
@@ -31,7 +31,7 @@ const hotelRoom = {
       title: 'Description',
       type: 'text',
       validation: Rule =>
-        Rule.required().min(100).error('Minimum 100 Characters'),
+        Rule.required().min(100).error('Minimo de 100 caracteres'),
     }),
     defineField({
       name: 'price',
@@ -75,13 +75,13 @@ const hotelRoom = {
     }),
     defineField({
       name: 'type',
-      title: 'Room Type',
+      title: 'Tipo de Associação',
       type: 'string',
       options: {
-        list: roomTypes,
+        list: tiposAssociacao,
       },
       validation: Rule => Rule.required(),
-      initialValue: 'basic',
+      initialValue: 'Outras',
     }),
     defineField({
       name: 'specialNote',
@@ -95,13 +95,6 @@ const hotelRoom = {
       name: 'dimension',
       title: 'Dimension',
       type: 'string',
-    }),
-    defineField({
-      name: 'numberOfBeds',
-      title: 'Number Of Beds',
-      type: 'number',
-      validation: Rule => Rule.min(1),
-      initialValue: 1,
     }),
     defineField({
       name: 'offeredAmenities',
@@ -138,4 +131,4 @@ const hotelRoom = {
   ],
 };
 
-export default hotelRoom;
+export default associacao;

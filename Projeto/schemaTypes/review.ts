@@ -13,10 +13,10 @@ const review = {
       validation: Rule => Rule.required(),
     }),
     defineField({
-      name: 'hotelRoom',
-      title: 'Hotel Room',
+      name: 'associacao',
+      title: 'Associação',
       type: 'reference',
-      to: [{ type: 'hotelRoom' }],
+      to: [{ type: 'associacao' }],
       validation: Rule => Rule.required(),
     }),
     defineField({
@@ -30,7 +30,7 @@ const review = {
       title: 'User Rating',
       type: 'number',
       validation: Rule =>
-        Rule.required().min(1).max(5).error('Rating must be between 1 and 5'),
+        Rule.required().min(1).max(5).error('Avalie entre 1 e 5'),
     }),
   ],
 };

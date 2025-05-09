@@ -1,5 +1,9 @@
 import { defineField } from 'sanity';
+/*
 
+Mudar isto para ser de sócios
+
+*/
 const booking = {
   name: 'booking',
   title: 'Booking',
@@ -13,10 +17,10 @@ const booking = {
       validation: Rule => Rule.required(),
     }),
     defineField({
-      name: 'hotelRoom',
-      title: 'Hotel Room',
+      name: 'associacao',
+      title: 'Associação',
       type: 'reference',
-      to: [{ type: 'hotelRoom' }],
+      to: [{ type: 'associacao' }],
       validation: Rule => Rule.required(),
     }),
     defineField({
