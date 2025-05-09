@@ -1,15 +1,15 @@
 import { FC } from 'react';
 import Image from 'next/image';
-import { Room } from '../models/room';
+import { Associacao } from '../models/associacao';
 import Link from 'next/link';
 
 type Props = {
-  room: Room;
+  associacao: Associacao;
 };
 
-const RoomCard: FC<Props> = props => {
+const AssociacaoCard: FC<Props> = props => {
   const {
-    room: { coverImage, name, price, type, description, slug, isBooked },
+    associacao: { coverImage, name, price, type, description, slug, isSocio},
   } = props;
 
   return (
@@ -30,19 +30,19 @@ const RoomCard: FC<Props> = props => {
           <p>$ {price}</p>
         </div>
 
-        <p className='pt-2 text-xs'>{type} Room</p>
+        <p className='pt-2 text-xs'>{type} Associação</p>
 
         <p className='pt-3 pb-6'>{description.slice(1, 100)}...</p>
 
         <Link
-          href={`/rooms/${slug.current}`}
+          href={`/associacao/${slug.current}`}
           className='bg-primary inline-block text-center w-full py-4 rounded-xl text-white text-xl font-bold hover:-translate-y-2 hover:shadow-lg transition-all duration-500'
         >
-          {isBooked ? 'BOOKED' : 'BOOK NOW'}
+          {isSocio ? 'BOOKED' : 'BOOK NOW'}
         </Link>
       </div>
     </div>
   );
 };
 
-export default RoomCard;
+export default AssociacaoCard;

@@ -18,17 +18,16 @@ type CoverImage = {
     current: string;
   };
   
-  export type Room = {
+  export type Associacao = {
     _id: string;
     coverImage: CoverImage;
     description: string;
     dimension: string;
     discount: number;
     images: Image[];
-    isBooked: boolean;
+    isSocio: boolean;
     isFeatured: boolean;
     name: string;
-    numberOfBeds: number;
     offeredAmenities: Amenity[];
     price: number;
     slug: Slug;
@@ -36,14 +35,11 @@ type CoverImage = {
     type: string;
   };
   
-  export type CreateBookingDto = {
+  export type CreateAssociarDto = {
     user: string;
-    hotelRoom: string;
-    checkinDate: string;
-    checkoutDate: string;
-    numberOfDays: number;
+    associacao: string;
+    isAnual: boolean;
     adults: number;
-    children: number;
     totalPrice: number;
     discount: number;
   };

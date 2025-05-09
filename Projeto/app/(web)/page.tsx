@@ -1,18 +1,18 @@
-import FeaturedRoom from '../components/FeaturedRoom/FeaturedRoom';
+import FeaturedRoom from '../components/featuredAssociacao/featuredAssociacao';
 import Gallery from '../components/Gallery/Gallery';
 import HeroSection from '../components/HeroSection/HeroSection';
 import NewsLetter from '../components/Newsletter/Newsletter'
 import PageSearch from '../components/PageSearch/PageSearch';
-import { getFeaturedRoom } from '../components/libs/apis';
+import { getFeaturedAssociacao } from '../components/libs/apis';
 
 const Home = async () => {
-  const featuredRoom = await getFeaturedRoom();
+  const featuredAssociacao = await getFeaturedAssociacao();
 
   return (
     <>
       <HeroSection />
       <PageSearch />
-      <FeaturedRoom featuredRoom={featuredRoom} />
+      <FeaturedRoom featuredAssociacao={featuredAssociacao} />
       <Gallery />
       <NewsLetter />
     </>

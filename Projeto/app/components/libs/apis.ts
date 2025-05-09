@@ -1,64 +1,52 @@
-import { CreateReviewDto, Review } from './../models/review';
 import axios from 'axios';
-
-import { CreateBookingDto, Room } from '../models/room';
+import { CreateReviewDto, Review, UpdateReviewDto } from '../models/review';
+import { CreateAssociarDto, Associacao } from '../models/associacao';
+import { Associar } from '../models/associar';
 import sanityClient from './sanity';
 import * as queries from './sanityQueries';
-import { Booking } from '../models/booking';
-import { UpdateReviewDto } from '../models/review';
 
-export async function getFeaturedRoom() {
-  const result = await sanityClient.fetch<Room>(
-    queries.getFeaturedRoomQuery,
-    {},
-    { cache: 'no-cache' }
-  );
-
-  return result;
-}
-
-export async function getRooms() {
-  const result = await sanityClient.fetch<Room[]>(
-    queries.getRoomsQuery,
+export async function getFeaturedAssociacao() {
+  const result = await sanityClient.fetch<Associacao>(
+    queries.getFeaturedAssociacaoQuery,
     {},
     { cache: 'no-cache' }
   );
   return result;
 }
 
-export async function getRoom(slug: string) {
-  const result = await sanityClient.fetch<Room>(
-    queries.getRooms,
+export async function getAssociacoes() {
+  const result = await sanityClient.fetch<Associacao[]>(
+    queries.getAssociacaoQuery,
+    {},
+    { cache: 'no-cache' }
+  );
+  return result;
+}
+
+export async function getAssociacaoBySlug(slug: string) {
+  const result = await sanityClient.fetch<Associacao>(
+    queries.getAssociacao,
     { slug },
     { cache: 'no-cache' }
   );
-
   return result;
 }
 
-export const createBooking = async ({
+export const createSocio = async ({
   adults,
-  checkinDate,
-  checkoutDate,
-  children,
   discount,
-  hotelRoom,
-  numberOfDays,
+  associacao,
   totalPrice,
   user,
-}: CreateBookingDto) => {
+}: CreateAssociarDto) => {
   const mutation = {
     mutations: [
       {
         create: {
-          _type: 'booking',
+          _type: 'socios',
           user: { _type: 'reference', _ref: user },
-          hotelRoom: { _type: 'reference', _ref: hotelRoom },
-          checkinDate,
-          checkoutDate,
-          numberOfDays,
+          associacao: { _type: 'reference', _ref: associacao },
           adults,
-          children,
           totalPrice,
           discount,
         },
@@ -75,14 +63,14 @@ export const createBooking = async ({
   return data;
 };
 
-export const updateHotelRoom = async (hotelRoomId: string) => {
+export const updateAssociacao = async (associacaoId: string) => {
   const mutation = {
     mutations: [
       {
         patch: {
-          id: hotelRoomId,
+          id: associacaoId,
           set: {
-            isBooked: true,
+            isSocio: true,
           },
         },
       },
@@ -98,15 +86,12 @@ export const updateHotelRoom = async (hotelRoomId: string) => {
   return data;
 };
 
-export async function getUserBookings(userId: string) {
-  const result = await sanityClient.fetch<Booking[]>(
-    queries.getUserBookingsQuery,
-    {
-      userId,
-    },
+export async function getUserSocios(userId: string) {
+  const result = await sanityClient.fetch<Associar[]>(
+    queries.getUserSociosQuery,
+    { userId },
     { cache: 'no-cache' }
   );
-
   return result;
 }
 
@@ -116,25 +101,19 @@ export async function getUserData(userId: string) {
     { userId },
     { cache: 'no-cache' }
   );
-
   return result;
 }
 
 export async function checkReviewExists(
   userId: string,
-  hotelRoomId: string
+  associacaoId: string
 ): Promise<null | { _id: string }> {
   const query = `*[_type == 'review' && user._ref == $userId && hotelRoom._ref == $hotelRoomId][0] {
     _id
   }`;
 
-  const params = {
-    userId,
-    hotelRoomId,
-  };
-
+  const params = { userId, associacaoId };
   const result = await sanityClient.fetch(query, params);
-
   return result ? result : null;
 }
 
@@ -167,7 +146,7 @@ export const updateReview = async ({
 };
 
 export const createReview = async ({
-  hotelRoomId,
+  associacao,
   reviewText,
   userId,
   userRating,
@@ -183,7 +162,7 @@ export const createReview = async ({
           },
           hotelRoom: {
             _type: 'reference',
-            _ref: hotelRoomId,
+            _ref: associacao,
           },
           userRating,
           text: reviewText,
@@ -201,14 +180,11 @@ export const createReview = async ({
   return data;
 };
 
-export async function getRoomReviews(roomId: string) {
+export async function getAssociacaoReviews(associacaoId: string) {
   const result = await sanityClient.fetch<Review[]>(
-    queries.getRoomReviewsQuery,
-    {
-      roomId,
-    },
+    queries.getAssociacaoReviewsQuery,
+    { associacaoId },
     { cache: 'no-cache' }
   );
-
   return result;
 }

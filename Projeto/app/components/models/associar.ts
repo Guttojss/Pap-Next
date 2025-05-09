@@ -1,4 +1,4 @@
-export type Booking = {
+export type Associar = {
     _id: string;
     hotelRoom: {
       _id: string;
@@ -6,11 +6,8 @@ export type Booking = {
       slug: { current: string };
       price: number;
     };
-    checkinDate: string;
-    checkoutDate: string;
-    numberOfDays: number;
+    anual: boolean;
     adults: number;
-    children: number;
     totalPrice: number;
     discount: number;
   };

@@ -4,22 +4,22 @@ import { useRouter } from 'next/navigation';
 import { ChangeEvent, FC } from 'react';
 
 type Props = {
-  roomTypeFilter: string;
+  associacaoTypeFilter: string;
   searchQuery: string;
-  setRoomTypeFilter: (value: string) => void;
+  setAssociacaoTypeFilter: (value: string) => void;
   setSearchQuery: (value: string) => void;
 };
 
 const Search: FC<Props> = ({
-  roomTypeFilter,
+  associacaoTypeFilter,
   searchQuery,
-  setRoomTypeFilter,
+  setAssociacaoTypeFilter,
   setSearchQuery,
 }) => {
   const router = useRouter();
 
-  const handleRoomTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setRoomTypeFilter(event.target.value);
+  const handleAssociacaoTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setAssociacaoTypeFilter(event.target.value);
   };
 
   const handleSearchQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +27,7 @@ const Search: FC<Props> = ({
   };
 
   const handleFilterClick = () => {
-    router.push(`/rooms?roomType=${roomTypeFilter}&searchQuery=${searchQuery}`);
+    router.push(`/associaoes?associacaoType=${associacaoTypeFilter}&searchQuery=${searchQuery}`);
   };
 
   return (
@@ -39,14 +39,14 @@ const Search: FC<Props> = ({
           </label>
           <div className='relative'>
             <select
-              value={roomTypeFilter}
-              onChange={handleRoomTypeChange}
+              value={associacaoTypeFilter}
+              onChange={handleAssociacaoTypeChange}
               className='w-full px-4 py-2 capitalize rounded leading-tight dark:bg-black focus:outline-none'
             >
               <option value='All'>Todas</option>
-              <option value='Basic'>Culturais</option>
-              <option value='Luxury'>Desportivos</option>
-              <option value='Suite'>Outros</option>
+              <option value='Culturais'>Culturais</option>
+              <option value='Desportivos'>Desportivos</option>
+              <option value='Outros'>Outros</option>
             </select>
           </div>
         </div>

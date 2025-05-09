@@ -31,14 +31,14 @@ const associacao = {
       title: 'Description',
       type: 'text',
       validation: Rule =>
-        Rule.required().min(100).error('Minimo de 100 caracteres'),
+        Rule.required().min(10).error('Minimo de 10 caracteres'),
     }),
     defineField({
       name: 'price',
       title: 'Price',
       type: 'number',
       validation: Rule =>
-        Rule.required().min(100).error('Minimum 100 Characters'),
+        Rule.required().min(1).error('Minimum 1 Characters'),
     }),
     defineField({
       name: 'discount',
@@ -111,8 +111,8 @@ const associacao = {
       ],
     }),
     defineField({
-      name: 'isBooked',
-      title: 'Is Booked',
+      name: 'isSocio',
+      title: 'É Sócio',
       type: 'boolean',
       initialValue: false,
     }),

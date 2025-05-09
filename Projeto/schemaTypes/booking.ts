@@ -1,12 +1,8 @@
 import { defineField } from 'sanity';
-/*
 
-Mudar isto para ser de sócios
-
-*/
-const booking = {
-  name: 'booking',
-  title: 'Booking',
+const socios = {
+  name: 'socios',
+  title: 'Sócios',
   type: 'document',
   fields: [
     defineField({
@@ -24,44 +20,25 @@ const booking = {
       validation: Rule => Rule.required(),
     }),
     defineField({
-      name: 'checkinDate',
-      title: 'Check-in Date',
-      type: 'date',
+      name: 'anual',
+      title: 'Anual?',
+      type: 'boolean',
+      initialValue: false,
       validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'checkoutDate',
-      title: 'Check-out Date',
-      type: 'date',
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'numberOfDays',
-      title: 'Number Of Days',
-      type: 'number',
-      initialValue: 1,
-      validation: Rule => Rule.required().min(1),
     }),
     defineField({
       name: 'discount',
-      title: 'Discount',
+      title: 'Desconto',
       type: 'number',
       initialValue: 0,
       validation: Rule => Rule.required().min(0),
     }),
     defineField({
       name: 'adults',
-      title: 'Adults',
+      title: 'Adultos',
       type: 'number',
       initialValue: 1,
       validation: Rule => Rule.required().min(1),
-    }),
-    defineField({
-      name: 'children',
-      title: 'Children',
-      type: 'number',
-      initialValue: 0,
-      validation: Rule => Rule.required().min(0),
     }),
     defineField({
       name: 'totalPrice',
@@ -72,4 +49,4 @@ const booking = {
   ],
 };
 
-export default booking;
+export default socios;

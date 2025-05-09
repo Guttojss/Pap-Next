@@ -4,28 +4,28 @@ import useSWR from 'swr';
 import { Review } from '../models/review';
 import Rating from '../Rating/Rating';
 
-const RoomReview: FC<{ roomId: string }> = ({ roomId }) => {
-  const fetchRoomReviews = async () => {
-    const { data } = await axios.get<Review[]>(`/api/room-reviews/${roomId}`);
+const AssociacaoReview: FC<{ associacaoId: string }> = ({ associacaoId }) => {
+  const fetchAssociacaoReviews = async () => {
+    const { data } = await axios.get<Review[]>(`/api/associacao-reviews/${associacaoId}`);
     return data;
   };
 
   const {
-    data: roomReviews,
+    data: associacaoReviews,
     error,
     isLoading,
-  } = useSWR('/api/room-reviews', fetchRoomReviews);
+  } = useSWR('/api/associacao-reviews', fetchAssociacaoReviews);
 
   if (error) throw new Error('Cannot fetch data');
-  if (typeof roomReviews === 'undefined' && !isLoading)
+  if (typeof associacaoReviews === 'undefined' && !isLoading)
     throw new Error('Cannot fetch data');
 
-  console.log(roomReviews);
+  console.log(associacaoReviews);
 
   return (
     <>
-      {roomReviews &&
-        roomReviews.map(review => (
+      {associacaoReviews &&
+        associacaoReviews.map(review => (
           <div
             className='bg-gray-100 dark:bg-gray-900 p-4 rounded-lg'
             key={review._id}
@@ -44,4 +44,4 @@ const RoomReview: FC<{ roomId: string }> = ({ roomId }) => {
   );
 };
 
-export default RoomReview;
+export default AssociacaoReview;
