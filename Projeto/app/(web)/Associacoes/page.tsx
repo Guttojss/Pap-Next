@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import Search from '../../components/Search/Search';
 import { getAssociacoes } from '@/app/components/libs/apis';
 import { Associacao } from '@/app/components/models/associacao';
-import AssociacaoCard from '@/app/components/AssociacaoCardCard/RoomCard';
+import AssociacaoCard from '@/app/components/AssociacaoCard/AssociacaoCard';
 
 const Associacoes = () => {
   const [associacaoTypeFilter, setTypeAssociacaoFilter] = useState('');

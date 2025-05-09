@@ -7,16 +7,25 @@ type Props = {
   associacao: Associacao;
 };
 
-const AssociacaoCard: FC<Props> = props => {
+const AssociacaoCard: FC<Props> = ({ associacao }) => {
   const {
-    associacao: { coverImage, name, price, type, description, slug, isSocio},
-  } = props;
+    coverImage, 
+    name, 
+    price, 
+    type, 
+    description, 
+    slug, 
+    isSocio
+  } = associacao;
+
+  // Obter a URL da imagem
+  const imageUrl = coverImage?.asset?.url || '/'; // Imagem padrão caso não exista
 
   return (
     <div className='rounded-xl w-72 mb-10 mx-auto md:mx-0 overflow-hidden text-black'>
       <div className='h-60 overflow-hidden'>
         <Image
-          src={coverImage.url}
+          src={imageUrl} // Use a URL da imagem aqui
           alt={name}
           width={250}
           height={250}
@@ -32,7 +41,7 @@ const AssociacaoCard: FC<Props> = props => {
 
         <p className='pt-2 text-xs'>{type} Associação</p>
 
-        <p className='pt-3 pb-6'>{description.slice(1, 100)}...</p>
+        <p className='pt-3 pb-6'>{description.slice(0, 100)}...</p>
 
         <Link
           href={`/associacao/${slug.current}`}
