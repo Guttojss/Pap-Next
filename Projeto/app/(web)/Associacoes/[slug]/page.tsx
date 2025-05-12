@@ -18,6 +18,7 @@ import { getStripe } from '@/app/components/libs/stripe';
 import AssociacaoReview from '@/app/components/AssociacaoReviews/AssociacaoReviews';
 import { Associacao } from '@/app/components/models/associacao';
 
+
 const AssociacaoDetails = () => {
   const { slug } = useParams();
   const [adults, setAdults] = useState(1);

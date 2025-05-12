@@ -1,9 +1,8 @@
-type CoverImage = {
-  asset: {
-    url: string;
-    image: Image;
+  type CoverImage = {
+    asset: {
+      url: string;
+    };
   };
-};
 
   
   export type Image = {

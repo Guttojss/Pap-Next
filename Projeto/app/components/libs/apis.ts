@@ -55,7 +55,7 @@ export const createSocio = async ({
   };
 
   const { data } = await axios.post(
-    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2025-03-31/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2025-02-19/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
     mutation,
     { headers: { Authorization: `Bearer ${process.env.SANITY_STUDIO_TOKEN}` } }
   );
@@ -78,7 +78,7 @@ export const updateAssociacao = async (associacaoId: string) => {
   };
 
   const { data } = await axios.post(
-    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2025-03-31/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2025-02-19/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
     mutation,
     { headers: { Authorization: `Bearer ${process.env.SANITY_STUDIO_TOKEN}` } }
   );
@@ -108,7 +108,7 @@ export async function checkReviewExists(
   userId: string,
   associacaoId: string
 ): Promise<null | { _id: string }> {
-  const query = `*[_type == 'review' && user._ref == $userId && hotelRoom._ref == $hotelRoomId][0] {
+  const query = `*[_type == 'review' && user._ref == $userId && associacao._ref == $assosiacaoId][0] {
     _id
   }`;
 
@@ -137,7 +137,7 @@ export const updateReview = async ({
   };
 
   const { data } = await axios.post(
-    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2025-03-31/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2025-02-19/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
     mutation,
     { headers: { Authorization: `Bearer ${process.env.SANITY_STUDIO_TOKEN}` } }
   );
@@ -172,7 +172,7 @@ export const createReview = async ({
   };
 
   const { data } = await axios.post(
-    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2025-03-31/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2025-02-19/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
     mutation,
     { headers: { Authorization: `Bearer ${process.env.SANITY_STUDIO_TOKEN}` } }
   );

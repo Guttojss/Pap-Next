@@ -27,7 +27,7 @@ const Search: FC<Props> = ({
   };
 
   const handleFilterClick = () => {
-    router.push(`/associaoes?associacaoType=${associacaoTypeFilter}&searchQuery=${searchQuery}`);
+    router.push(`/Associacoes?associacaoType=${associacaoTypeFilter}&searchQuery=${searchQuery}`);
   };
 
   return (
@@ -46,7 +46,7 @@ const Search: FC<Props> = ({
               <option value='All'>Todas</option>
               <option value='Culturais'>Culturais</option>
               <option value='Desportivos'>Desportivos</option>
-              <option value='Outros'>Outros</option>
+              <option value='Outras'>Outras</option>
             </select>
           </div>
         </div>

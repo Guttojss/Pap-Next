@@ -1,88 +1,74 @@
 import Stripe from 'stripe';
-
 import { authOptions } from '../../components/libs/auth';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
-import { getRoom } from '../../components/libs/apis';
+import { getAssociacaoBySlug } from '../../components/libs/apis';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: '2025-03-31.basil',
 });
+
 type RequestData = {
-  checkinDate: string;
-  checkoutDate: string;
   adults: number;
-  children: number;
-  numberOfDays: number;
-  hotelRoomSlug: string;
+  slug: string;
 };
 
-export async function POST(req: Request, res: Response) {
-  const {
-    checkinDate,
-    adults,
-    checkoutDate,
-    children,
-    hotelRoomSlug,
-    numberOfDays,
-  }: RequestData = await req.json();
-
-  if (
-    !checkinDate ||
-    !checkoutDate ||
-    !adults ||
-    !hotelRoomSlug ||
-    !numberOfDays
-  ) {
-    return new NextResponse('Please all fields are required', { status: 400 });
+export async function POST(req: Request) {
+  // 1️⃣ Lê e valida o body
+  const { adults, slug }: RequestData = await req.json();
+  if (adults == null || !slug) {
+    return new NextResponse('Please fill all fields', { status: 400 });
   }
 
-  const origin = req.headers.get('origin');
+  // 2️⃣ Origem (para urls de sucesso/erro)
+  const origin = req.headers.get('origin') ?? '';
 
+  // 3️⃣ Autenticação
   const session = await getServerSession(authOptions);
-
   if (!session) {
-    return new NextResponse('Authentication required', { status: 400 });
+    return new NextResponse('Authentication required', { status: 401 });
   }
-
   const userId = session.user.id;
-  const formattedCheckoutDate = checkoutDate.split('T')[0];
-  const formattedCheckinDate = checkinDate.split('T')[0];
 
   try {
-    const room = await getRoom(hotelRoomSlug);
-    const discountPrice = room.price - (room.price / 100) * room.discount;
-    const totalPrice = discountPrice * numberOfDays;
+    // 4️⃣ Busca a associação pelo slug
+    const associacao = await getAssociacaoBySlug(slug);
+    if (!associacao) {
+      return new NextResponse('Association not found', { status: 404 });
+    }
 
-    // Create a stripe payment
+    // 5️⃣ Calcula preço total e desconto
+    const { price, discount, name, images, _id } = associacao;
+    const discountedPrice = price - (price * discount) / 100;
+    const totalAmountCents = Math.round(discountedPrice * 100);
+
+    // 6️⃣ Cria sessão no Stripe
     const stripeSession = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: [
         {
           quantity: 1,
           price_data: {
-            currency: 'usd',
+            currency: 'eur',
             product_data: {
-              name: room.name,
-              images: room.images.map(image => image.url),
+              name,
+              images: images.map(img => img.url),
             },
-            unit_amount: parseInt((totalPrice * 100).toString()),
+            unit_amount: totalAmountCents,
           },
         },
       ],
       payment_method_types: ['card'],
       success_url: `${origin}/users/${userId}`,
+      cancel_url: `${origin}/Associacoes/${slug}`,
       metadata: {
-        adults,
-        checkinDate: formattedCheckinDate,
-        checkoutDate: formattedCheckoutDate,
-        children,
-        hotelRoom: room._id,
-        numberOfDays,
+        adults: adults.toString(),
+        associacao: _id,
         user: userId,
-        discount: room.discount,
-        totalPrice
-      }
+        discount: discount.toString(),
+        totalPrice: discountedPrice.toString(),
+        isAnual: 'false',               // ou 'true' se for anual
+      },
     });
 
     return NextResponse.json(stripeSession, {
@@ -90,7 +76,7 @@ export async function POST(req: Request, res: Response) {
       statusText: 'Payment session created',
     });
   } catch (error: any) {
-    console.log('Payment falied', error);
-    return new NextResponse(error, { status: 500 });
+    console.error('Payment failed:', error);
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

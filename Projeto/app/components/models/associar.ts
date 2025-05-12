@@ -1,6 +1,6 @@
 export type Associar = {
     _id: string;
-    hotelRoom: {
+    associacao: {
       _id: string;
       name: string;
       slug: { current: string };

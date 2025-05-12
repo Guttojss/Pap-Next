@@ -20,7 +20,7 @@ const ClientComponent: FC<Props> = props => {
         <div className='flex justify-between mt-12'>
           <div className='flex gap-3 flex-col items-center justify-center'>
             <p className='text-xs lg:text-xl text-center'>Associações Culturais</p>
-            <CountUpNumber duration={5000} endValue={1} />
+            <CountUpNumber duration={5000} endValue={0} />
           </div>
           <div className='flex gap-3 flex-col items-center justify-center'>
             <p className='text-xs lg:text-xl text-center'>Associações Desportivas</p>
@@ -28,7 +28,7 @@ const ClientComponent: FC<Props> = props => {
           </div>
           <div className='flex gap-3 flex-col items-center justify-center'>
             <p className='text-xs lg:text-xl text-center'>Outras Associações</p>
-            <CountUpNumber duration={5000} endValue={0} />
+            <CountUpNumber duration={5000} endValue={1} />
           </div>
         </div>
       </div>

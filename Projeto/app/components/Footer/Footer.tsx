@@ -1,5 +1,3 @@
-import { MdDarkMode } from "react-icons/md";
-import { FaUserCircle } from "react-icons/fa";
 import Link from 'next/link';
 import { BsFillSendFill, BsTelephoneOutbound } from "react-icons/bs";
 import { BiMessageDetail } from "react-icons/bi";

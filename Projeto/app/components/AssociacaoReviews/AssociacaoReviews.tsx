@@ -3,10 +3,9 @@ import { FC } from 'react';
 import useSWR from 'swr';
 import { Review } from '../models/review';
 import Rating from '../Rating/Rating';
-
 const AssociacaoReview: FC<{ associacaoId: string }> = ({ associacaoId }) => {
-  const fetchAssociacaoReviews = async () => {
-    const { data } = await axios.get<Review[]>(`/api/associacao-reviews/${associacaoId}`);
+  const fetchAssociacaoReviews = async (url: string) => {
+    const { data } = await axios.get<Review[]>(url);
     return data;
   };
 
@@ -14,13 +13,17 @@ const AssociacaoReview: FC<{ associacaoId: string }> = ({ associacaoId }) => {
     data: associacaoReviews,
     error,
     isLoading,
-  } = useSWR('/api/associacao-reviews', fetchAssociacaoReviews);
+  } = useSWR(
+    associacaoId ? `/api/associacao-reviews/${associacaoId}` : null,
+    fetchAssociacaoReviews
+  );
 
-  if (error) throw new Error('Cannot fetch data');
-  if (typeof associacaoReviews === 'undefined' && !isLoading)
-    throw new Error('Cannot fetch data');
+  if (error) {
+    console.error(error);
+    return <p className="text-red-500">Erro ao buscar avaliações.</p>;
+  }
 
-  console.log(associacaoReviews);
+  if (isLoading) return <p>Carregando avaliações...</p>;
 
   return (
     <>

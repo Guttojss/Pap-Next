@@ -3,15 +3,15 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Booking } from '../models/associar';
+import { Associar } from '../models/associar';
 
 type Props = {
-  bookingDetails: Booking[];
-  setRoomId: Dispatch<SetStateAction<string | null>>;
+  associarDetails: Associar[];
+  setAssociacaoId: Dispatch<SetStateAction<string | null>>;
   toggleRatingModal: () => void;
 };
 
-const Table: FC<Props> = ({ bookingDetails, setRoomId, toggleRatingModal }) => {
+const Table: FC<Props> = ({ associarDetails, setAssociacaoId, toggleRatingModal }) => {
   const router = useRouter();
 
   return (
@@ -23,34 +23,31 @@ const Table: FC<Props> = ({ bookingDetails, setRoomId, toggleRatingModal }) => {
             <th className='px-6 py-3'>Unit Price</th>
             <th className='px-6 py-3'>Price</th>
             <th className='px-6 py-3'>Discount</th>
-            <th className='px-6 py-3'>No. Days Booked</th>
-            <th className='px-6 py-3'>Days Left</th>
             <th className='px-6 py-3'></th>
           </tr>
         </thead>
         <tbody>
-          {bookingDetails.map(booking => (
+          {associarDetails.map(associar => (
             <tr
-              key={booking._id}
+              key={associar._id}
               className='bg-white border-b hover:bg-gray-50'
             >
               <th
                 onClick={() =>
-                  router.push(`/rooms/${booking.hotelRoom.slug.current}`)
+                  router.push(`/associacoes/${associar.associacao.slug.current}`)
                 }
                 className='px-6 underline text-blue-600 cursor-pointer py-4 font-medium whitespace-nowrap'
               >
-                {booking.hotelRoom.name}
+                {associar.associacao.name}
               </th>
-              <td className='px-6 py-4'>{booking.hotelRoom.price}</td>
-              <td className='px-6 py-4'>{booking.totalPrice}</td>
-              <td className='px-6 py-4'>{booking.discount}</td>
-              <td className='px-6 py-4'>{booking.numberOfDays}</td>
+              <td className='px-6 py-4'>{associar.associacao.price}</td>
+              <td className='px-6 py-4'>{associar.totalPrice}</td>
+              <td className='px-6 py-4'>{associar.discount}</td>
               <td className='px-6 py-4'>0</td>
               <td className='px-6 py-4'>
                 <button
                   onClick={() => {
-                    setRoomId(booking.hotelRoom._id);
+                    setAssociacaoId(associar.associacao._id);
                     toggleRatingModal()
                   }}
                   className='font-medium text-blue-600 hover:underline'

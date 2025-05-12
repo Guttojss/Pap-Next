@@ -18,14 +18,13 @@ const AssociacaoCard: FC<Props> = ({ associacao }) => {
     isSocio
   } = associacao;
 
-  // Obter a URL da imagem
-  const imageUrl = coverImage?.asset?.url || '/'; // Imagem padrão caso não exista
+const imageUrl = coverImage?.asset?.url || '/fallback-image.jpg';
 
   return (
     <div className='rounded-xl w-72 mb-10 mx-auto md:mx-0 overflow-hidden text-black'>
       <div className='h-60 overflow-hidden'>
         <Image
-          src={imageUrl} // Use a URL da imagem aqui
+          src={imageUrl}
           alt={name}
           width={250}
           height={250}
@@ -36,7 +35,7 @@ const AssociacaoCard: FC<Props> = ({ associacao }) => {
       <div className='p-4 bg-white'>
         <div className='flex justify-between text-xl font-semibold'>
           <p>{name}</p>
-          <p>$ {price}</p>
+          <p>€ {price}</p>
         </div>
 
         <p className='pt-2 text-xs'>{type} Associação</p>
@@ -44,10 +43,10 @@ const AssociacaoCard: FC<Props> = ({ associacao }) => {
         <p className='pt-3 pb-6'>{description.slice(0, 100)}...</p>
 
         <Link
-          href={`/associacao/${slug.current}`}
+          href={`/Associacoes/${slug.current}`}
           className='bg-primary inline-block text-center w-full py-4 rounded-xl text-white text-xl font-bold hover:-translate-y-2 hover:shadow-lg transition-all duration-500'
         >
-          {isSocio ? 'BOOKED' : 'BOOK NOW'}
+          {isSocio ? 'Sócio' : 'Associe-se!'}
         </Link>
       </div>
     </div>

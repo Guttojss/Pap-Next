@@ -5,8 +5,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 import Image from 'next/image';
 import axios from 'axios';
 import { signOut } from 'next-auth/react';
-
-import { getUserBookings } from '../../../components/libs/apis';
+import { getUserSocios } from '../../../components/libs/apis';
 import { User } from '../../../components/models/user';
 import LoadingSpinner from '../../loading';
 import { useState } from 'react';
@@ -24,9 +23,9 @@ const UserDetails = (props: { params: { id: string } }) => {
   } = props;
 
   const [currentNav, setCurrentNav] = useState<
-    'bookings' | 'amount' | 'ratings'
-  >('bookings');
-  const [roomId, setRoomId] = useState<string | null>(null);
+    'socios' | 'amount' | 'ratings'
+  >('socios');
+  const [assosiacaoId, setAssociacaoId] = useState<string | null>(null);
   const [isRatingVisible, setIsRatingVisible] = useState(false);
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
   const [ratingValue, setRatingValue] = useState<number | null>(0);
@@ -39,7 +38,7 @@ const UserDetails = (props: { params: { id: string } }) => {
       return toast.error('Please provide a rating text and a rating');
     }
 
-    if (!roomId) toast.error('Id not provided');
+    if (!assosiacaoId) toast.error('Id not provided');
 
     setIsSubmittingReview(true)
 
@@ -47,7 +46,7 @@ const UserDetails = (props: { params: { id: string } }) => {
       const { data } = await axios.post('/api/users', {
         reviewText: ratingText,
         ratingValue,
-        roomId,
+        assosiacaoId,
       });
       console.log(data);
       toast.success('Review Submitted');
@@ -57,23 +56,23 @@ const UserDetails = (props: { params: { id: string } }) => {
     } finally {
       setRatingText('');
       setRatingValue(null);
-      setRoomId(null);
+      setAssociacaoId(null);
       setIsSubmittingReview(false);
       setIsRatingVisible(false);
     }
   };
 
-  const fetchUserBooking = async () => getUserBookings(userId);
+  const fetchUserBooking = async () => getUserSocios(userId);
   const fetchUserData = async () => {
     const { data } = await axios.get<User>('/api/users');
     return data;
   };
 
   const {
-    data: userBookings,
+    data: userSocios,
     error,
     isLoading,
-  } = useSWR('/api/userbooking', fetchUserBooking);
+  } = useSWR('/api/usersocios', fetchUserBooking);
 
   const {
     data: userData,
@@ -82,7 +81,7 @@ const UserDetails = (props: { params: { id: string } }) => {
   } = useSWR('/api/users', fetchUserData);
 
   if (error || errorGettingUserData) throw new Error('Cannot fetch data');
-  if (typeof userBookings === 'undefined' && !isLoading)
+  if (typeof userSocios === 'undefined' && !isLoading)
     throw new Error('Cannot fetch data');
   if (typeof userData === 'undefined' && !loadingUserData)
     throw new Error('Cannot fetch data');
@@ -151,11 +150,11 @@ const UserDetails = (props: { params: { id: string } }) => {
           <nav className='sticky top-0 px-2 w-fit mx-auto md:w-full md:px-5 py-3 mb-8 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 mt-7'>
             <ol
               className={`${
-                currentNav === 'bookings' ? 'text-blue-600' : 'text-gray-700'
+                currentNav === 'socios' ? 'text-blue-600' : 'text-gray-700'
               } inline-flex mr-1 md:mr-5 items-center space-x-1 md:space-x-3`}
             >
               <li
-                onClick={() => setCurrentNav('bookings')}
+                onClick={() => setCurrentNav('socios')}
                 className='inline-flex items-center cursor-pointer'
               >
                 <BsJournalBookmarkFill />
@@ -181,11 +180,11 @@ const UserDetails = (props: { params: { id: string } }) => {
             </ol>
           </nav>
 
-          {currentNav === 'bookings' ? (
-            userBookings && (
+          {currentNav === 'socios' ? (
+            userSocios && (
               <Table
-                bookingDetails={userBookings}
-                setRoomId={setRoomId}
+                associarDetails={userSocios}
+                setAssociacaoId={setAssociacaoId}
                 toggleRatingModal={toggleRatingModal}
               />
             )
@@ -194,7 +193,7 @@ const UserDetails = (props: { params: { id: string } }) => {
           )}
 
           {currentNav === 'amount' ? (
-            userBookings && <Chart userBookings={userBookings} />
+            userSocios && <Chart userSocios={userSocios} />
           ) : (
             <></>
           )}

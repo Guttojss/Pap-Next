@@ -10,7 +10,7 @@ type Props = {
 };
 
 const FeaturedAssociacao: FC<Props> = ({ featuredAssociacao }) => {
-  if (!featuredAssociacao || !featuredAssociacao.coverImage || !featuredAssociacao.coverImage.url) {
+  if (!featuredAssociacao || !featuredAssociacao.coverImage || !featuredAssociacao.coverImage.asset.url) {
     return null; 
   }
 
@@ -19,7 +19,7 @@ const FeaturedAssociacao: FC<Props> = ({ featuredAssociacao }) => {
       <div className='md:grid gap-8 grid-cols-1'>
         <div className='rounded-2xl overflow-hidden h-48 mb-4 md:mb-0'>
           <Image
-            src={featuredAssociacao.coverImage.url}
+            src={featuredAssociacao.coverImage.asset.url}
             alt={featuredAssociacao.name ?? 'Associacao em Destaque'}
             width={300}
             height={300}

@@ -1,7 +1,6 @@
 'use client';
 
 import { Dispatch, FC, SetStateAction } from 'react';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 type Props = {
@@ -34,7 +33,7 @@ const BookAssociacaoCta: FC<Props> = props => {
         <span
           className={`${discount ? 'text-gray-400' : ''} font-bold text-xl`}
         >
-          $ {price}
+          € {price}
         </span>
         {discount ? (
           <span className='font-bold text-xl'>
@@ -57,7 +56,7 @@ const BookAssociacaoCta: FC<Props> = props => {
             htmlFor='adults'
             className='block text-sm font-medium text-gray-900 dark:text-gray-400'
           >
-            Adults
+            Sócios
           </label>
           <input
             type='number'
@@ -77,7 +76,7 @@ const BookAssociacaoCta: FC<Props> = props => {
         onClick={handleBookNowClick}
         className='btn-primary w-full mt-6 disabled:bg-gray-500 disabled:cursor-not-allowed'
       >
-        {isSocio ? 'Booked' : 'Book Now'}
+        {isSocio ? 'Sócio' : 'Associe-se!'}
       </button>
     </div>
   );
