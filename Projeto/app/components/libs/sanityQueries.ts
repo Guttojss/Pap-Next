@@ -57,7 +57,7 @@ export const getAssociacao = groq`*[_type == "associacao" && slug.current == $sl
     type
 }`;
 
-export const getUserSociosQuery = groq`*[_type == 'Socio' && user._ref == $userId] {
+export const getUserSociosQuery = groq`*[_type == 'socios' && user._ref == $userId] {
     _id,
     associacao -> {
         _id,

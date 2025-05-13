@@ -108,7 +108,7 @@ export async function checkReviewExists(
   userId: string,
   associacaoId: string
 ): Promise<null | { _id: string }> {
-  const query = `*[_type == 'review' && user._ref == $userId && associacao._ref == $assosiacaoId][0] {
+  const query = `*[_type == 'review' && user._ref == $userId && associacao._ref == $associacaoId][0] {
     _id
   }`;
 
@@ -160,7 +160,7 @@ export const createReview = async ({
             _type: 'reference',
             _ref: userId,
           },
-          hotelRoom: {
+          associacao: {
             _type: 'reference',
             _ref: associacao,
           },

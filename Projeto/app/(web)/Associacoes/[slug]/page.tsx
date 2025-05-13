@@ -33,7 +33,7 @@ const AssociacaoDetails = () => {
     try {
       const { data: stripeSession } = await axios.post('/api/stripe', {
         adults,
-        associacaoSlug: associacao.slug.current,
+        slug: associacao.slug.current,
       });
 
       if (stripe) {

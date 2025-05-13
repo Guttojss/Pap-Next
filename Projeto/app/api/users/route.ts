@@ -9,11 +9,11 @@ import {
 } from '../../components/libs/apis';
 
 
-export async function GET(req: Request, res: Response) {
+export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse('Authentication Required', { status: 500 });
+    return new NextResponse('Authentication Required', { status: 401 });
   }
 
   const userId = session.user.id;
@@ -26,11 +26,11 @@ export async function GET(req: Request, res: Response) {
   }
 }
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse('Authentication Required', { status: 500 });
+    return new NextResponse('Authentication Required', { status: 401 });
   }
 
   const { associacaoId, reviewText, ratingValue } = await req.json();
