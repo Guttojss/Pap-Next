@@ -1,13 +1,9 @@
 import { getAssociacaoReviews } from '../../../components/libs/apis';
-import { NextResponse, type NextRequest } from 'next/server';
-
-type Params = {
-  id: string;
-};
+import { NextResponse } from 'next/server';
 
 export async function GET(
-  req: NextRequest,
-  { params }: { params: Params } // Explicitly define the type for params
+  req: Request,
+  { params }: { params: { id: string } }
 ) {
   const associacaoId = params.id;
 
@@ -16,10 +12,10 @@ export async function GET(
 
     return NextResponse.json(associacaoReviews, {
       status: 200,
-      statusText: 'Successful',
+      statusText: 'Succesful',
     });
   } catch (error) {
-    console.error('Getting Review Failed', error);
+    console.log('Getting Review Failed', error);
     return new NextResponse('Unable to fetch', { status: 400 });
   }
 }
